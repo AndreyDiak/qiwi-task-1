@@ -6,31 +6,35 @@ const dates = {
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
-   const selector = document.getElementById("select");
+   const data = await fetchData();
 
+   const { Valute, Date, PreviousDate } = data;
+
+   valutes = Valute;
+
+   dates.current = Date;
+   dates.previous = PreviousDate;
+
+   const selector = document.getElementById("select");
+   
+   Object.keys(Valute).map((key) => {
+      const valute = Valute[key];
+      selector.innerHTML += `<option value='${key}'>${valute.ID} ${valute.Name}</option>`;
+   });
+
+   setFirstElem();
+});
+
+async function fetchData() {
    try {
       const api = await fetch("https://www.cbr-xml-daily.ru/daily_json.js");
-      const data = await api.json();
-
-      const { Valute, Date, PreviousDate } = data;
-
-      valutes = Valute;
-
-      dates.current = Date;
-      dates.previous = PreviousDate;
-
-      Object.keys(Valute).map((key) => {
-         const valute = Valute[key];
-         selector.innerHTML += `<option value='${key}'>${valute.ID} ${valute.Name}</option>`;
-      });
-
-      setFirstElem();
-   } catch (err) {
+      return api.json();
+   } catch (e) {
       document.getElementById(
          "error"
-      ).innerHTML = `<span class="error">Fetch API error ${err.message}</span>`;
+      ).innerHTML = `<span class="error">Fetch API error ${e.message}</span>`;
    }
-});
+}
 
 function setFirstElem() {
    const key = Object.keys(valutes)[0];
