@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", async () => {
    dates.previous = PreviousDate;
 
    const selector = document.getElementById("select");
-   
+
    Object.keys(Valute).map((key) => {
       const valute = Valute[key];
       selector.innerHTML += `<option value='${key}'>${valute.ID} ${valute.Name}</option>`;
@@ -48,11 +48,20 @@ function onChange(key) {
       "activeData"
    ).innerHTML = `<span><b>${valute.ID} ${valute.Name} ${valute.CharCode}</b></span>`;
 
-   document.getElementById("activeCurrent").innerHTML = `<span><b>${new Date(
-      dates.current
-   ).toLocaleString()}  ${valute.Value}</b></span>`;
+   const innerDateHtml = (date) => `<span>${new Date(date).toLocaleString()}</span>`;
 
-   document.getElementById("activePrevios").innerHTML = `<span><b>${new Date(
-      dates.previous
-   ).toLocaleString()}  ${valute.Previous}</b></span>`;
+   const innerPriceHtml = (price, numCode) =>
+      `<span><b>${price} <span class='valuteSymbol'>&#${numCode}</span></b></span>`;
+
+   document.getElementById("activeCurrent").innerHTML = `
+      <span>Тек. дата</span>
+      ${innerDateHtml(dates.current)}
+      ${innerPriceHtml(valute.Value, valute.NumCode)}
+     `;
+
+   document.getElementById("activePrevious").innerHTML = `
+      <span>Пред. дата</span>
+      ${innerDateHtml(dates.previous)}
+      ${innerPriceHtml(valute.Previous, valute.NumCode)}
+   `;
 }

@@ -8,12 +8,21 @@
       <link rel="stylesheet" href="style.css" />
    </head>
    <body>
-      <select name="select" id="select" onchange="onChange(value);"></select>
-      <div id="active">
-         <div id="activeData"></div>
-         <div id="activeCurrent"></div>
-         <div id="activePrevios"></div>
+      <div class="content">
+         <div class="block">
+            <span>Выбор валюты</span>
+            <select name="select" id="select" onchange="onChange(value);"></select>
+            <div id="active">
+               <div id="activeData"></div>
+               <div id="activeCurrent">
+                  <span>Текущая</span>
+               </div>
+               <div id="activePrevious">
+                  <span>Пред</span>
+               </div>
+            </div>
+            <span id="error"></span>
+         </div>
       </div>
-      <span id="error"></span>
    </body>
 </html>
