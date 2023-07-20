@@ -44,23 +44,24 @@ function setFirstElem() {
 function onChange(key) {
    const valute = valutes[key];
 
-   document.getElementById(
-      "activeData"
-   ).innerHTML = `<span><b>${valute.ID} ${valute.Name} ${valute.CharCode}</b></span>`;
-
    const innerDateHtml = (date) => `<span>${new Date(date).toLocaleString()}</span>`;
 
    const innerPriceHtml = (price, numCode) =>
       `<span><b>${price} <span class='valuteSymbol'>&#${numCode}</span></b></span>`;
 
+   document.getElementById("activeData").innerHTML = `
+      <b>${valute.ID}</b>
+      <span>${valute.Name} <b>${valute.CharCode}</b></span>
+   `;
+
    document.getElementById("activeCurrent").innerHTML = `
-      <span>Тек. дата</span>
+      <span>Тек.</span>
       ${innerDateHtml(dates.current)}
       ${innerPriceHtml(valute.Value, valute.NumCode)}
      `;
 
    document.getElementById("activePrevious").innerHTML = `
-      <span>Пред. дата</span>
+      <span>Пред.</span>
       ${innerDateHtml(dates.previous)}
       ${innerPriceHtml(valute.Previous, valute.NumCode)}
    `;
