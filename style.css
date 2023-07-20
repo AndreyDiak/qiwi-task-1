@@ -1,0 +1,17 @@
+#select {
+   margin-bottom: 10px;
+}
+
+#activeData {
+   margin-bottom: 10px;
+   font-size: 24px;
+}
+
+#activeCurrent {
+   margin-bottom: 10px;
+}
+
+#error {
+   color: red;
+   font-size: 18px;
+}
